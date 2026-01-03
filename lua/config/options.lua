@@ -6,3 +6,6 @@ vim.opt.relativenumber = true -- それ以外は相対行番号
 vim.opt.cursorline = true     -- 現在行をハイライト
 vim.opt.cursorcolumn = true   -- 現在列をハイライト
 
+-- 通常貼り付けを常にクリップボードからにする
+vim.opt.clipboard = "unnamedplus"
+
