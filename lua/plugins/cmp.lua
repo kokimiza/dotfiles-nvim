@@ -1,56 +1,80 @@
 return {
-  {
-    "saghen/blink.cmp",
-    dependencies = { "rafamadriz/friendly-snippets" },
-    version = "v1.*",
+	-- 1. 補完エンジン: blink.cmp
+	{
+		"saghen/blink.cmp",
+		dependencies = { "rafamadriz/friendly-snippets" },
+		version = "v1.*",
+		opts = {
+			keymap = { preset = "super-tab" },
+			appearance = { nerd_font_variant = "mono" },
+			completion = {
+				documentation = { auto_show = true, auto_show_delay_ms = 200 },
+				menu = { border = "rounded" },
+				ghost_text = { enabled = true },
+			},
+			signature = { enabled = true, window = { border = "rounded" } },
+			sources = {
+				default = { "lsp", "path", "snippets", "buffer" },
+			},
+		},
+		opts_extend = { "sources.default" },
+	},
 
-    ---@module 'blink.cmp'
-    ---@type blink.cmp.Config
-    opts = {
-      -- 1. キーマップ: デフォルトが使いにくい場合はここを調整
-      -- 公式推奨の 'default' は C-y で確定、'super-tab' は Tab で確定
-      keymap = { preset = "default" },
+	-- 2. LSP設定
+	{
+		"neovim/nvim-lspconfig",
+		dependencies = { "saghen/blink.cmp" },
+		config = function()
+			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-      -- 2. 外観: モダンなアイコンと視認性の向上
-      appearance = {
-        nerd_font_variant = "mono",
-      },
+			local servers = {
+				lua_ls = {},
 
-      -- 3. 補完動作
-      completion = {
-        -- 入力中にドキュメントを自動表示（IDEのような体験）
-        documentation = { 
-          auto_show = true, 
-          auto_show_delay_ms = 200 
-        },
-        -- 補完ウィンドウに枠線を付ける
-        menu = { border = "rounded" },
-        -- 補完候補の確定前に「ゴーストテキスト」を表示
-        ghost_text = { enabled = true },
-      },
-      -- 4. 関数の引数ガイド
-      signature = { 
-        enabled = true,
-        window = { border = "rounded" }
-      },
-      sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
-      },
-    },
-    -- 拡張性を確保するための設定
-    opts_extend = { "sources.default" },
-  },
-  {
-    "neovim/nvim-lspconfig",
-    dependencies = { "saghen/blink.cmp" },
-    config = function(_, opts)
-      local lspconfig = require("lspconfig")
-      -- ここで各LSPサーバーをセットアップ
-      -- blink.cmp の capabilities を渡すことでフル機能が解放されます
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
+				haskell = {
+					settings = {
+						haskell = {
+							formattingProvider = "ormolu",
+							checkProject = true,
+						},
+					},
+				},
 
-      lspconfig.lua_ls.setup({ capabilities = capabilities })
-      -- 他のサーバーもあれば setup
-    end,
-  },
+				-- Typst / Tinymist
+				tinymist = {
+					settings = {
+						formatterMode = "typstyle",
+						exportPdf = "onType",
+						semanticTokens = "disable",
+					},
+				},
+
+				rust_analyzer = {},
+
+				-- Python: 型解析 (basedpyright) と リンター (ruff)
+				basedpyright = {
+					settings = {
+						basedpyright = {
+							analysis = {
+								typeCheckingMode = "basic", -- 必要に応じて "strict" に変更
+								autoImportCompletions = true,
+							},
+						},
+					},
+				},
+
+				ruff = {
+					-- ruff のホバー表示は pyright と重複するため無効化
+					on_attach = function(client)
+						client.server_capabilities.hoverProvider = false
+					end,
+				},
+			}
+
+			for server, config in pairs(servers) do
+				config.capabilities = capabilities
+				vim.lsp.config(server, config)
+				vim.lsp.enable(server)
+			end
+		end,
+	},
 }
