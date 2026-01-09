@@ -6,6 +6,7 @@ return {
 		formatters_by_ft = {
 			lua = { "stylua" },
 			haskell = { "ormolu" },
+			rust = { "rustfmt" },
 		},
 		format_on_save = {
 			timeout_ms = 500,
