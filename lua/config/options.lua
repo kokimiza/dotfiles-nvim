@@ -1,18 +1,18 @@
 -- 行番号表示
-vim.opt.number = true         -- 現在行は絶対行番号
+vim.opt.number = true -- 現在行は絶対行番号
 vim.opt.relativenumber = true -- それ以外は相対行番号
 
 -- カーソル行・列のハイライト
-vim.opt.cursorline = true     -- 現在行をハイライト
-vim.opt.cursorcolumn = true   -- 現在列をハイライト
+vim.opt.cursorline = true -- 現在行をハイライト
+vim.opt.cursorcolumn = true -- 現在列をハイライト
 
 -- 通常貼り付けを常にクリップボードからにする
 vim.opt.clipboard = "unnamedplus"
 
 -- インデント設定
-vim.opt.autoindent = true     -- 自動インデント
-vim.opt.smartindent = true    -- スマートインデント
-vim.opt.expandtab = true      -- タブをスペースに変換
-vim.opt.tabstop = 2           -- タブ幅
-vim.opt.shiftwidth = 2        -- インデント幅
-vim.opt.softtabstop = 2       -- ソフトタブ幅
+vim.opt.autoindent = true -- 自動インデント
+vim.opt.smartindent = true -- スマートインデント
+vim.opt.expandtab = true -- タブをスペースに変換
+vim.opt.tabstop = 2 -- タブ幅
+vim.opt.shiftwidth = 2 -- インデント幅
+vim.opt.softtabstop = 2 -- ソフトタブ幅
