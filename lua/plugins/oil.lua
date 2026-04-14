@@ -9,8 +9,7 @@ return {
     cmd = { 'Oil' },
     keys = {
       { '-', '<cmd>Oil<CR>', desc = '親ディレクトリを開く' },
-      { '<leader>e', '<cmd>Oil<CR>', desc = 'ファイルエクスプローラーを開く' },
-      { '<leader>E', '<cmd>Oil --float<CR>', desc = 'フローティングエクスプローラー' },
+      { '<leader>e', '<cmd>Oil --float<CR>', desc = 'フローティングエクスプローラー' },
     },
     opts = {
       default_file_explorer = true,
