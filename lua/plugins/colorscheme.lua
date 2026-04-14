@@ -1,20 +1,20 @@
 return {
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    'catppuccin/nvim',
+    name = 'catppuccin',
     priority = 1000,
     config = function()
-      require("catppuccin").setup({
-        flavour = "mocha"
+      require('catppuccin').setup({
+        flavour = 'mocha',
       })
-      vim.cmd.colorscheme("catppuccin")
+      vim.cmd.colorscheme('catppuccin')
     end,
   },
 
   {
-    "nvim-treesitter/nvim-treesitter",
+    'nvim-treesitter/nvim-treesitter',
     lazy = false,
-    build = ":TSUpdate",
+    build = ':TSUpdate',
     config = function()
       if vim.list == nil then
         vim.list = {}
@@ -51,19 +51,16 @@ return {
         end
       end
 
-      require("nvim-treesitter").setup({})
+      require('nvim-treesitter').setup({})
 
-      local ts_config = require("nvim-treesitter.config")
-      local installed = ts_config.get_installed("parsers")
-      if not vim.tbl_contains(installed, "haskell") then
-        vim.notify(
-          "nvim-treesitter: Haskell parser is not installed. Run :TSInstall haskell",
-          vim.log.levels.WARN
-        )
+      local ts_config = require('nvim-treesitter.config')
+      local installed = ts_config.get_installed('parsers')
+      if not vim.tbl_contains(installed, 'haskell') then
+        vim.notify('nvim-treesitter: Haskell parser is not installed. Run :TSInstall haskell', vim.log.levels.WARN)
       end
 
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "haskell" },
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = { 'haskell' },
         callback = function()
           pcall(vim.treesitter.start)
         end,
@@ -71,4 +68,3 @@ return {
     end,
   },
 }
-

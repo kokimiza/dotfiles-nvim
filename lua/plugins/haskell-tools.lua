@@ -1,9 +1,8 @@
 return {
   {
-    "mrcjkb/haskell-tools.nvim",
-    version = "^4",
-    ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
-    config = function()
-    end
+    'mrcjkb/haskell-tools.nvim',
+    version = '^4',
+    ft = { 'haskell', 'lhaskell', 'cabal', 'cabalproject' },
+    config = function() end,
   },
 }
