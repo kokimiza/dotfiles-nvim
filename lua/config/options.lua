@@ -7,12 +7,12 @@ vim.opt.cursorline = true -- 現在行をハイライト
 vim.opt.cursorcolumn = true -- 現在列をハイライト
 
 -- 通常貼り付けを常にクリップボードからにする
-vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard = 'unnamedplus'
 
 -- インデント設定
 vim.opt.autoindent = true -- 自動インデント
 vim.opt.smartindent = true -- スマートインデント
 vim.opt.expandtab = true -- タブをスペースに変換
-vim.opt.tabstop = 2 -- タブ幅
-vim.opt.shiftwidth = 2 -- インデント幅
-vim.opt.softtabstop = 2 -- ソフトタブ幅
+vim.opt.tabstop = 4 -- タブ幅
+vim.opt.shiftwidth = 4 -- インデント幅
+vim.opt.softtabstop = 4 -- ソフトタブ幅
